@@ -14,7 +14,7 @@ namespace api_jwt_authentication.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("Hello to everyone");
+            return Ok("Hello from PublicController to everyone");
         }
     }
 }

@@ -41,6 +41,12 @@ namespace api_jwt_authentication
                         ValidateAudience = false
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Employee", policy => policy.RequireRole("Employee", "Manager"));
+                options.AddPolicy("Manager", policy => policy.RequireRole("Manager"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

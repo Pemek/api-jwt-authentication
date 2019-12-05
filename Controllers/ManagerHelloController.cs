@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api_jwt_authentication.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Manager")]
     [Route("api/[controller]")]
     [ApiController]
-    public class SecuredHelloController : ControllerBase
+    public class ManagerHelloController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok($"Hello to {HttpContext.User.FindFirst(ClaimTypes.Email).Value} with role {HttpContext.User.FindFirst(ClaimTypes.Role).Value}");
+            return Ok($"Hello from ManagerController to {User.FindFirst(ClaimTypes.Email).Value} with role {User.FindFirst(ClaimTypes.Role).Value}");
         }
     }
 }
