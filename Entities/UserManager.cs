@@ -7,7 +7,7 @@ namespace api_jwt_authentication.Entities
 {
     public class UserManager
     {
-        private List<User> allUsers = new List<User>
+        private static List<User> allUsers = new List<User>
         {
             new User
             {
@@ -25,9 +25,16 @@ namespace api_jwt_authentication.Entities
             }
         };
 
-        public User GetUser(string email, string passwrod)
+        public static User GetUser(string email, string passwrod)
         {
-            return allUsers.SingleOrDefault(x => x.Email == email && x.Password == passwrod);
+            var user = allUsers.SingleOrDefault(x => x.Email == email && x.Password == passwrod);
+            User copyOfUser = null;
+            if (user != null)
+            {
+                copyOfUser = new User(user);
+                copyOfUser.Password = null;
+            }
+            return copyOfUser;
         }
     }
 }
